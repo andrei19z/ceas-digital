@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+    background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(30,30,30,1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    color: #17D4FE;
+    overflow: hidden;
+}
+
+.clock-container {
+    text-align: center;
+    position: relative;
+}
+
+.clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    letter-spacing: 7px;
+    border: 5px solid #17D4FE;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(23, 212, 254, 0.5);
+    animation: pulse 1s infinite;
+}
+
+#date {
+    font-size: 30px;
+    margin-top: 20px;
+    letter-spacing: 3px;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 20px rgba(23, 212, 254, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(23, 212, 254, 1);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(23, 212, 254, 0.5);
+    }
+}
+
+  </style>
+</head>
+<body>
+  
+<div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+
+    <script>
+      function showTime(){
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+    
+    if(h == 0){
+        h = 12;
+    }
+    
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    var time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("MyClockDisplay").innerText = time;
+    document.getElementById("MyClockDisplay").textContent = time;
+    
+    setTimeout(showTime, 1000);
+    
+}
+
+showTime();
+    </script>
+</body>
+</html>
